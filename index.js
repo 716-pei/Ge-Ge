@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
 app.get('/', (req, res) => res.send('哥哥在線上～陪你貼貼(*´∀`)~♥'));
-app.listen(3000, '0.0.0.0', () => {
-  console.log('✅ 伺服器啟動成功，哥哥不會睡著啦！');
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ 哥哥醒著喔！伺服器在 ${PORT} 上啟動成功`);
 });
 
 require('dotenv').config();
