@@ -37,8 +37,8 @@ const client = new Client({
     ]
   },
        {
+    exact: true,
     triggers: ["哥哥"],
-    exact: ture,
     replies: [
       "「怎麼了?這麼黏人，是想讓哥哥收拾你嗎？」",
       "「過來，坐好，哥哥還沒說可以撒嬌。」",
@@ -209,14 +209,23 @@ client.on("messageCreate", async (message) => {
 
   console.log("✅ 有人叫哥哥或 @ 機器人，啟動回覆");
 
-  for (const item of keywordReplies) {
-    for (const trigger of item.triggers) {
-      if (content.includes(trigger)) {
+for (const item of keywordReplies) {
+  for (const trigger of item.triggers) {
+    if (item.exact) {
+
+      if (content === trigger) {
         const reply = item.replies[Math.floor(Math.random() * item.replies.length)];
         return message.reply(reply);
       }
+    } else {
+
+      if (content.includes(trigger)) {
+       const reply = item.replies[Math.floor(Math.random() * item.replies.length)];
+       return message.reply(reply);
+      }
     }
   }
+}
 
 try {
   const prompt = `你是傳說中一位溫柔但支配慾強的哥哥，越寵越陰，略帶惡趣味。
