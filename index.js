@@ -205,26 +205,36 @@ client.on("messageCreate", async (message) => {
 
   const content = message.content.trim();
 
-
-  console.log("✅ 有人叫哥哥或 @ 機器人，啟動回覆");
-
-for (const item of keywordReplies) {
-  for (const trigger of item.triggers) {
+  // ✅ Step 1：如果是精準的「哥哥」才回覆哥哥那段
+  for (const item of keywordReplies) {
     if (item.exact) {
-
-      if (content === trigger) {
-        const reply = item.replies[Math.floor(Math.random() * item.replies.length)];
-        return message.reply(reply);
-      }
-    } else {
-
-      if (content.includes(trigger)) {
-       const reply = item.replies[Math.floor(Math.random() * item.replies.length)];
-       return message.reply(reply);
+      for (const trigger of item.triggers) {
+        if (content === trigger) {
+          const reply = item.replies[Math.floor(Math.random() * item.replies.length)];
+          return message.reply(reply);
+        }
       }
     }
   }
-}
+
+  // ✅ Step 2：只有在有提到「哥哥」或 @bot 時才觸發模糊關鍵字回覆
+  const isCallingBot = content.includes("哥哥") || message.mentions.has(client.user);
+  if (!isCallingBot) return;
+
+  for (const item of keywordReplies) {
+    if (!item.exact) {
+      for (const trigger of item.triggers) {
+        if (content.includes(trigger)) {
+          const reply = item.replies[Math.floor(Math.random() * item.replies.length)];
+          return message.reply(reply);
+        }
+      }
+    }
+  }
+
+  // ✅ Step 3：如果都沒中，就不回覆，結束這回合
+});
+
 
 try {
   const prompt = `你是傳說中一位溫柔但支配慾強的哥哥，越寵越陰，略帶惡趣味。
