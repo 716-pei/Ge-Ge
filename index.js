@@ -8,6 +8,10 @@ app.listen(3000, '0.0.0.0', () => {
 require('dotenv').config();
 const { Client, GatewayIntentBits } = require('discord.js');
 const axios = require('axios');
+const { OpenAI } = require("openai");
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 const client = new Client({
   intents: [
@@ -201,25 +205,30 @@ client.on("messageCreate", async (message) => {
     }
   }
 
-  try {
-    const prompt = `你是傅雲深，一位溫柔但支配慾強的哥哥，語氣深情、略帶控制欲。現在用一段話回覆以下訊息：「${content}」`;
+try {
+  const prompt = `你是傳說中一位溫柔但支配慾強的哥哥，越寵越陰，略帶惡趣味。
+現在用一句話回應以下訊息，語氣請帶有控制欲與親密感：
 
-    const response = await axios.post('https://api.openai.com/v1/chat/completions', {
-      model: 'gpt-3.5-turbo',
-      messages: [{ role: 'user', content: prompt }],
-    }, {
-      headers: {
-        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
-        'Content-Type': 'application/json',
-      }
-    });
+「${content}」`;
 
-    const reply = response.data.choices[0].message.content.trim();
-    message.reply(reply);
-  } catch (err) {
-    console.error('OpenAI 錯誤：', err.response?.data || err.message);
-    message.reply('……我現在不想說話。');
+  const completion = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo",
+    messages: [{ role: "user", content: prompt }],
+    temperature: 0.8,
+    max_tokens: 100,
+  });
+
+  const reply = completion.choices?.[0]?.message?.content?.trim();
+
+  if (reply) {
+    await message.reply(reply);
+  } else {
+    await message.reply("哥哥現在有點累，之後再說。");
   }
+} catch (err) {
+  console.error("OpenAI 錯誤：", err);
+  await message.reply("……我現在不想說話。");
+}
 });
 
 const token = process.env.DISCORD_BOT_TOKEN;
