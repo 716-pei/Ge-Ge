@@ -254,33 +254,7 @@ client.on("messageCreate", async (message) => {
     }
   }
 
-  // ✅ Step 3：如果都沒中，用 OpenAI 回覆（這段一定要在這裡）
-if (!content.includes("哥哥") && !message.mentions.has(client.user)) return;
-  
-  try {
-    const prompt = `你是傳說中一位溫柔但支配慾強的哥哥，越寵越陰，略帶惡趣味。
-現在用一句話回應以下訊息，語氣請帶有控制欲與親密感：
 
-「${content}」`;
-
-    const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0.8,
-      max_tokens: 100,
-    });
-
-    const reply = completion.choices?.[0]?.message?.content?.trim();
-
-    if (reply) {
-      await message.reply(reply);
-    } else {
-      await message.reply("哥哥現在有點累，之後再說。");
-    }
-  } catch (err) {
-    console.error("OpenAI 錯誤：", err);
-    await message.reply("……我現在不想說話。");
-  }
 });
 
 const token = process.env.DISCORD_BOT_TOKEN;
