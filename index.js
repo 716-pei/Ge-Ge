@@ -38,6 +38,7 @@ const client = new Client({
   },
        {
     triggers: ["哥哥"],
+    exact: ture,
     replies: [
       "「怎麼了?這麼黏人，是想讓哥哥收拾你嗎？」",
       "「過來，坐好，哥哥還沒說可以撒嬌。」",
