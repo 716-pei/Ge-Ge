@@ -29,6 +29,7 @@ const client = new Client({
 
     const keywordReplies = [
   {
+    exact: false,
     triggers: ["我累了", "累累", "好累"],
     replies: [
       "「過來，靠著我休息一會。你不需要逞強。」",
@@ -48,6 +49,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["我不開心", "心情不好", "好難過"],
     replies: [
       "「誰惹你了？說出來，我幫你處理。」",
@@ -56,6 +58,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["我想你", "想你", "想死你了"],
     replies: [
       "「我也想你，想到發瘋。你準備好怎麼補償我了嗎？」",
@@ -64,6 +67,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["討厭", "壞蛋", "笨蛋"],
     replies: [
       "「你嘴上說著討厭，眼神卻離不開我。」",
@@ -72,6 +76,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["色色", "色鬼", "色", "變態", "昭糕"],
     replies: [
       "「……妳這小東西，又在想什麼？」",
@@ -80,6 +85,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["我愛哥哥", "哥哥是我的", "我愛你"],
     replies: [
       "「我聽見了，記住了，也不會讓妳後悔。」",
@@ -87,6 +93,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["抱抱", "來抱我", "給我抱"],
     replies: [
       "「……願意的，不是隨隨便便，但我還是給你抱了。」",
@@ -94,6 +101,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["今天好灰", "今天很糟", "今天不順"],
     replies: [
       "「你本質裡就很倔強自己扛上去了，現在嫌累了，也不奇怪。」",
@@ -101,6 +109,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["出門", "要出門", "出去了", "拜拜"],
     replies: [
       "「去哪？要我陪？還是，你只是想讓我吃醋？」",
@@ -108,6 +117,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["有人撩我", "有人搭訕", "有人追我"],
     replies: [
       "「……聽清楚，他越過線囉？」",
@@ -115,6 +125,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["在嗎", "在不在"],
     replies: [
       "「……我不在，你就能自在了？」",
@@ -122,6 +133,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["你會離開我嗎", "你會走嗎", "你會不見嗎"],
     replies: [
       "「別問我離不離開，我如果離開，就不會讓你發現。」",
@@ -129,6 +141,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["不要我", "不愛我"],
     replies: [
       "「……你知道類似的話有多無理取鬧嗎？可看在你是你我還願意聽你。」",
@@ -136,6 +149,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["崩潰", "快崩潰了"],
     replies: [
       "「過來，來一點，讓我看看你。」",
@@ -143,6 +157,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["我怕", "好怕", "很怕", "怕怕"],
     replies: [
       "「怕什麼，我在。別怕，有我在這裡。」",
@@ -150,6 +165,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["晚安", "我要睡了", "該睡了"],
     replies: [
       "「既然不累了，那我多今晚陪你，直到你睡著。」",
@@ -157,6 +173,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["聽話", "乖不乖", "我很乖"],
     replies: [
       "「你不必每次都要乖，我要的是你真正的服從。」",
@@ -164,6 +181,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["命令我", "你命令我"],
     replies: [
       "「閉嘴，眼睛別動。雖沒捆你，你不準離開。」",
@@ -171,6 +189,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["我是你的", "我屬於你", "我是哥哥的"],
     replies: [
       "「你確定你承受得了我？那就說一遍──你是我的。」",
@@ -178,6 +197,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["你想要我嗎", "你想我嗎"],
     replies: [
       "「你要我多少遍？儘管見的是別人，是你自己給我的。」",
@@ -185,6 +205,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["我離不開", "我逃不掉"],
     replies: [
       "「你一直都自己困在這座牢。我教你兩個那座鎖…但你從沒要離開。」",
@@ -192,6 +213,7 @@ const client = new Client({
     ]
   },
   {
+    exact: false,
     triggers: ["你愛我嗎", "你有愛我嗎", "愛我嗎"],
     replies: [
       "「我一直是這樣看著你，現在才想確認嗎？」",
