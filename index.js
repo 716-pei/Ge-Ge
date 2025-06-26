@@ -204,8 +204,7 @@ client.on("messageCreate", async (message) => {
   if (message.author.bot) return;
 
   const content = message.content.trim();
-  const isCallingBot = content.includes("哥哥") || message.mentions.has(client.user);
-  if (!isCallingBot) return;
+
 
   console.log("✅ 有人叫哥哥或 @ 機器人，啟動回覆");
 
