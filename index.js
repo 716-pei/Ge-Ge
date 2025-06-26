@@ -236,10 +236,10 @@ client.on("messageCreate", async (message) => {
 if (!content.includes("哥哥") && !message.mentions.has(client.user)) return;
   
   try {
-    const prompt = 你是傳說中一位溫柔但支配慾強的哥哥，越寵越陰，略帶惡趣味。
+    const prompt = `你是傳說中一位溫柔但支配慾強的哥哥，越寵越陰，略帶惡趣味。
 現在用一句話回應以下訊息，語氣請帶有控制欲與親密感：
 
-「${content}」;
+「${content}」`;
 
     const completion = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
