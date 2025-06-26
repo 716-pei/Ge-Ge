@@ -205,7 +205,7 @@ client.on("messageCreate", async (message) => {
 
   const content = message.content.trim();
 
-  // ✅ Step 1：如果是精準的「哥哥」才回覆哥哥那段
+  // Step 1：精準的「哥哥」才回覆哥哥那段
   for (const item of keywordReplies) {
     if (item.exact) {
       for (const trigger of item.triggers) {
@@ -217,7 +217,7 @@ client.on("messageCreate", async (message) => {
     }
   }
 
-  // ✅ Step 2：只有在有提到「哥哥」或 @bot 時才觸發模糊關鍵字回覆
+  // Step 2：有提到「哥哥」或 @bot 才觸發模糊回覆
   const isCallingBot = content.includes("哥哥") || message.mentions.has(client.user);
   if (!isCallingBot) return;
 
@@ -232,34 +232,33 @@ client.on("messageCreate", async (message) => {
     }
   }
 
-  // ✅ Step 3：如果都沒中，就不回覆，結束這回合
-});
-
-
-try {
-  const prompt = `你是傳說中一位溫柔但支配慾強的哥哥，越寵越陰，略帶惡趣味。
+  // ✅ Step 3：如果都沒中，用 OpenAI 回覆（這段一定要在這裡）
+if (!content.includes("哥哥") && !message.mentions.has(client.user)) return;
+  
+  try {
+    const prompt = 你是傳說中一位溫柔但支配慾強的哥哥，越寵越陰，略帶惡趣味。
 現在用一句話回應以下訊息，語氣請帶有控制欲與親密感：
 
-「${content}」`;
+「${content}」;
 
-  const completion = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
-    messages: [{ role: "user", content: prompt }],
-    temperature: 0.8,
-    max_tokens: 100,
-  });
+    const completion = await openai.chat.completions.create({
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: prompt }],
+      temperature: 0.8,
+      max_tokens: 100,
+    });
 
-  const reply = completion.choices?.[0]?.message?.content?.trim();
+    const reply = completion.choices?.[0]?.message?.content?.trim();
 
-  if (reply) {
-    await message.reply(reply);
-  } else {
-    await message.reply("哥哥現在有點累，之後再說。");
+    if (reply) {
+      await message.reply(reply);
+    } else {
+      await message.reply("哥哥現在有點累，之後再說。");
+    }
+  } catch (err) {
+    console.error("OpenAI 錯誤：", err);
+    await message.reply("……我現在不想說話。");
   }
-} catch (err) {
-  console.error("OpenAI 錯誤：", err);
-  await message.reply("……我現在不想說話。");
-}
 });
 
 const token = process.env.DISCORD_BOT_TOKEN;
