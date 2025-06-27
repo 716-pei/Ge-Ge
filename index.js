@@ -222,23 +222,29 @@ const client = new Client({
   }
 ];
 
+function sanitize(input) {
+  return input
+    .normalize("NFKD") // 拆解特殊符號（表情等）
+    .replace(/[^\p{L}\p{N}]/gu, "") // 移除非字母/數字（emoji、符號、標點等）
+    .trim()
+    .toLowerCase();
+}
 client.on("messageCreate", async (message) => {
   if (message.author.bot) return;
 
   const content = message.content.trim();
 
   // Step 1：精準的「哥哥」才回覆哥哥那段
-  for (const item of keywordReplies) {
+ for (const item of keywordReplies) {
     if (item.exact) {
       for (const trigger of item.triggers) {
-        if (content === trigger) {
+       if (sanitize(content) === sanitize(trigger)) {
           const reply = item.replies[Math.floor(Math.random() * item.replies.length)];
           return message.reply(reply);
         }
       }
     }
   }
-
   // Step 2：有提到「哥哥」或 @bot 才觸發模糊回覆
   const isCallingBot = content.includes("哥哥") || message.mentions.has(client.user);
   if (!isCallingBot) return;
@@ -246,7 +252,7 @@ client.on("messageCreate", async (message) => {
   for (const item of keywordReplies) {
     if (!item.exact) {
       for (const trigger of item.triggers) {
-        if (content.includes(trigger)) {
+        if (sanitize(content).includes(sanitize(trigger))) {
           const reply = item.replies[Math.floor(Math.random() * item.replies.length)];
           return message.reply(reply);
         }
