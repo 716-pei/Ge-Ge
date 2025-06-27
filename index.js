@@ -224,8 +224,9 @@ const client = new Client({
 
 function sanitize(input) {
   return input
-    .normalize("NFKD") // 拆解特殊符號（表情等）
-    .replace(/[^\p{L}\p{N}]/gu, "") // 移除非字母/數字（emoji、符號、標點等）
+    .normalize("NFKD")
+    .replace(/[\p{Emoji}\p{P}\p{S}\p{M}\p{Z}~～\u3000]/gu, "") // 更強化移除符號、標點、emoji、空白
+    .replace(/[(（【].*?[)）】]/g, "") // 移除「顏文字」包裹的內容 (⋯) 或 【⋯】
     .trim()
     .toLowerCase();
 }
