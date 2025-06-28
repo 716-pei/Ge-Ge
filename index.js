@@ -315,6 +315,42 @@ client.on("messageCreate", async (message) => {
   }
 
 
+});client.on("messageDelete", (msg) => {
+  if (
+    !msg.partial &&
+    msg.content &&
+    typeof msg.content === "string" &&
+    msg.content.includes("哥哥")
+  ) {
+    const deletedReplies = [
+      "「刪掉了？呵，怎麼不敢留下來讓哥哥看清楚？」",
+      "「訊息一消，我就知道你在逃避什麼。」",
+      "「想隱藏對哥哥的心思？太晚了，小貓。」"
+    ];
+    const reply = deletedReplies[Math.floor(Math.random() * deletedReplies.length)];
+    msg.channel.send(reply);
+  }
+});
+
+client.on("messageUpdate", (oldMsg, newMsg) => {
+  if (
+    !oldMsg.partial &&
+    oldMsg.content &&
+    newMsg.content &&
+    typeof oldMsg.content === "string" &&
+    typeof newMsg.content === "string" &&
+    oldMsg.content !== newMsg.content &&
+    oldMsg.content.includes("哥哥") &&
+    newMsg.content.includes("哥哥")
+  ) {
+    const editedReplies = [
+      "「改了內容？你以為這樣哥哥就不會看穿你？」",
+      "「就算換句話說，哥哥也知道你真正想表達的是什麼。」",
+      "「你改的不是訊息，是你那點藏不住的心虛。」"
+    ];
+    const reply = editedReplies[Math.floor(Math.random() * editedReplies.length)];
+    newMsg.channel.send(reply);
+  }
 });
 
 const token = process.env.DISCORD_BOT_TOKEN;
