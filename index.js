@@ -322,7 +322,7 @@ const client = new Client({
   },
       {
   exact: false,
-  triggers: ["壞壞"],
+  triggers: ["壞壞", "壞"],
   replies: [
     "「說我壞壞？妳又不是第一次知道。」",
     "「現在才發現我壞，是不是有點太晚了……嗯？」",
